@@ -6,7 +6,7 @@ A modular, keras like class based implementation for building neural networks us
 ### Regression: 
 
 regression_net=feed_forward(input_dim=5, task='regression', non_linearity='tanh')                  
-regression_net.add(10)  
+regression_net.add(10)  #add a layer with 10 neurons, plus a bias neuron
 regression_net.add(8)  
 regression_net.add(1)  #output  
 regression_net.predict(np.random.rand(1,5))   #make a prediction  
