@@ -1,6 +1,6 @@
 # NumpyNets
 
-A modular, class based implementation for building neural networks using numpy. 
+A modular, keras like class based implementation for building neural networks using numpy. 
 
 
 ### Regression: 
