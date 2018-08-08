@@ -1,8 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-
-
 class feed_forward:
     
     def __init__(self,input_dim=10,task='regression',non_linearity='tanh',optimizer='sgd',num_classes=None):
@@ -25,7 +23,6 @@ class feed_forward:
         self.weights=[]
         self.biases=[]
         
-    
     def initializer(self,shape):
         #feel free to have more complicated initializers, here we just use a normal dist initializer. 
         return np.random.normal(0,0.1,shape)
@@ -49,7 +46,6 @@ class feed_forward:
         a1=np.dot(input_data,self.weights[0])+ np.ones([num_examples,1])*self.biases[0].T #also written as X*w + np.tile(bias,[samples,1])
         z1=self._non_linear(a1)
         output.append(z1) 
-        
         
         for idx in range(1,len(self.weights)): #one weight has already been used, let us use the other ones
             
@@ -99,7 +95,6 @@ class feed_forward:
                 
                 return 1-np.square(x) #note that x inputted is already the tanh of the activation, so we do only square, and not square(tanh(x))
             
-        
     def convert_to_one_hot(self,t):
         #t is [0,2,1] etc, purely class indices.
         labels=t.reshape(-1,1) #incase it is of shape (x,)
@@ -170,7 +165,6 @@ class feed_forward:
                 print('The training {} loss is now {}'.format(self.loss,loss_val))
                 learning_rate=learning_rate*0.99 #learning rate decay
                 
-
 #Let's generate a dataset with circular decision boundary, visualize it and test the network!
                 
 thresh=0.8 #this will be the square of the radius of the circle
@@ -187,9 +181,8 @@ y=np.array(y)
 
 #Let us build the feed forward network. 
 
-b=feed_forward(input_dim=2,task='classification',num_classes=2,non_linearity='relu') 
-                    
-b.add(10) 
+b=feed_forward(input_dim=2,task='classification',num_classes=2,non_linearity='relu')                  
+b.add(10)  #10 neuron layer
 b.add(5)
 b.add(2) #2 output neurons, for 2 classes. If regression, you can use 1. 
 
@@ -203,7 +196,7 @@ predict_probs=b.predict(test_input) #predict the probabilties for the input data
 class_outputs=np.argmax(predict_probs,axis=1) #taking maximum probability
 
 plt.scatter(test_input[:,0],test_input[:,1],c=class_outputs)          #visualize the output of the network on test set.
-circle1=plt.Circle((0,0),np.sqrt(thresh),fill=False,color='r')        #plotting the circular decision boundary
+circle1=plt.Circle((0,0),np.sqrt(thresh),fill=False,color='r')        #plot the circular decision boundary
 plt.gcf().gca().add_artist(circle1)
 
 
