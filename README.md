@@ -3,7 +3,9 @@
 A modular, keras like class based implementation for building neural networks using numpy. 
 
 
-![Alt text](relative/path/to/img.jpg?raw=true "Title")
+
+![Visualisation of network output on test set](/images/test_set_output.png)
+
 
 ### Regression: 
 
@@ -22,4 +24,3 @@ class_net.add(3) #number of classes
 class_net.predict(np.random.rand(1,10)) #predict the probabilities.  
 
 
-![Visualizaiton of output on test set](/images/screenshot.png)
