@@ -4,7 +4,7 @@ A modular, keras like class based implementation for building neural networks us
 
 
 <p align="center">
-  <img src="https://github.com/sritee/NumpyNets/master/images/test_set_output.png?raw=true" alt="Visualisation"/>
+  <img src="https://github.com/sritee/NumpyNets/tree/master/images/test_set_output.png?raw=true" alt="Visualisation"/>
 </p>
 
 
