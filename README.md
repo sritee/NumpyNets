@@ -8,7 +8,7 @@ A modular, keras like class based implementation for building neural networks us
   <img src="/images/test_set_output.png" alt="Visualisation"/>  
     
 </p>
-
+Figure 1: Visualization of the feed forward network's output. The circle indicates the non-linear decision boundary of the net.
 
 
 ### Regression: 
