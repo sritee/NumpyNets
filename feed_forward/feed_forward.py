@@ -2,7 +2,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 class feed_forward:
-    
     def __init__(self,input_dim=10,task='regression',non_linearity='tanh',optimizer='sgd',num_classes=None):
         
         self.input_dim=input_dim
