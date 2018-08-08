@@ -36,7 +36,7 @@ class feed_forward:
             self.weights.append(self.initializer([self.input_dim,num_neurons]))
             self.biases.append(self.initializer([num_neurons,1]))
         else:
-            self.weights.append(self.initializer([self.weights[-1].shape[1],num_neurons]))
+            self.weights.append(self.initializer([self.weights[-1].shape[1],num_neurons])) #previous weight second dim x num_neurons
             self.biases.append(self.initializer([num_neurons,1]))
             
             
@@ -111,15 +111,15 @@ class feed_forward:
         if self.loss=='mean_squared_error':
             
             output=self.predict(x)
-            mean_squared_error=np.mean(np.square(output-t))
-            return mean_squared_error
+            mean_squared_error_value=np.mean(np.square(output-t))
+            return mean_squared_error_value
             
         elif self.loss=='cross_entropy':
             
             labels=self.convert_to_one_hot(t)
             probs=self.predict(x) #the probabilities
-            loss_val=np.mean(np.sum(-np.log(probs)*labels,axis=1))
-            return loss_val
+            cross_entropy_loss_value=np.mean(np.sum(-np.log(probs)*labels,axis=1))
+            return cross_entropy_loss_value
         
     def get_gradients(self,x,t):
         grad_weights=[]
@@ -129,7 +129,7 @@ class feed_forward:
         
         if self.loss=='mean_squared_error':
             
-            delta=(activations[-1]-t)
+            delta=(activations[-1]-t) #y-t 
             
         elif self.loss=='cross_entropy':
             
@@ -137,7 +137,7 @@ class feed_forward:
             
         #first, the gradient of the weights connecting to the output
         
-        grad_weights.append(np.matmul(activations[-2].T ,delta)/x.shape[0]) #we divide by number of samples in batch!
+        grad_weights.append(np.matmul(activations[-2].T ,delta)/x.shape[0]) #we divide by number of samples in batch for av. loss!
         grad_biases.append(np.dot(delta.T,np.ones([x.shape[0],1]))/x.shape[0])
 
         for idx in range(1,len(self.weights)):
