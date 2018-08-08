@@ -8,7 +8,7 @@ A modular, keras like, implementation for building neural networks using Numpy.
   <img src="/images/test_set_output.png" alt="Visualisation"/>  
     
 </p>
-Figure 1: Visualization of the feed forward network's output. The circle indicates the non-linear decision boundary of the net.
+Figure 1: Visualization of the feed forward network's output on test set. Circle indicates non-linear decision boundary.
 
 
 ### Regression: 
