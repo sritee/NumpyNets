@@ -198,7 +198,3 @@ class_outputs=np.argmax(predict_probs,axis=1) #taking maximum probability
 plt.scatter(test_input[:,0],test_input[:,1],c=class_outputs)          #visualize the output of the network on test set.
 circle1=plt.Circle((0,0),np.sqrt(thresh),fill=False,color='r')        #plot the circular decision boundary
 plt.gcf().gca().add_artist(circle1)
-
-
-
-#
