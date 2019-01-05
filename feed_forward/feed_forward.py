@@ -58,9 +58,9 @@ class feed_forward:
         if self.task=='classification':      
             
             o=output[-1]
-            vals=np.exp(o-np.tile(np.max(o,axis=1),(o.shape[1],1)).T) #max value subtracted for numerical stability.
-            sums=np.sum(vals,axis=1)
-            prob=vals/(np.tile(sums,(o.shape[1],1)).T)
+            vals=np.exp(o-np.max(o,axis=1,keepdims=True)) #max value subtracted for numerical stability.
+            sums=np.sum(vals,axis=1,keepdims=True)
+            prob=vals/sums
             output[-1]=prob #last output is the transformed softmax
             
             if train=='0':
@@ -112,7 +112,7 @@ class feed_forward:
             
             labels=self.convert_to_one_hot(t)
             probs=self.predict(x) #the probabilities
-            cross_entropy_loss_value=np.mean(np.sum(-np.log(probs)*labels,axis=1))
+            cross_entropy_loss_value=np.mean(np.sum(-np.log(probs + 1e-7)*labels,axis=1))
             return cross_entropy_loss_value
         
     def get_gradients(self,x,t):
@@ -145,7 +145,7 @@ class feed_forward:
             
         return [grad_weights,grad_biases]
     
-    def train_network(self,x,t,num_iterations=100,learning_rate=0.1):
+    def train_network(self,x,t,num_iterations=1000,learning_rate=0.1):
         
         t=t.reshape(-1,1) #Incase it is of shape (x,), we add an extra dimension for compute.
         
@@ -161,7 +161,7 @@ class feed_forward:
             
             if idx%100==0:
                 loss_val=self.compute_loss(x,t)
-                print('The training {} loss is now {}'.format(self.loss,loss_val))
+                print('The training {} loss is {} in iteration {}'.format(self.loss,loss_val,idx))
                 learning_rate=learning_rate*0.99 #learning rate decay
                 
 #Let's generate a dataset with circular decision boundary, visualize it and test the network!
